@@ -59,5 +59,6 @@ typings/
 
 # sensitive files
 keys.js
+log.txt
 
 .DS_Store

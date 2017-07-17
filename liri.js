@@ -37,6 +37,7 @@ switch (cmd) {
         } else {
             getSongInfo();
         }
+
         break;
     case "movie-this":
         // This will output the following information to your terminal/bash window:
@@ -50,7 +51,11 @@ switch (cmd) {
         //  - Actors in the movie.
         // If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
         // You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `40e9cece`.
-        getMovieInfo(option1);
+        if (option1) {
+            getMovieInfo(option1);
+        } else {
+            getMovieInfo();
+        }
 
         break;
     case "do-what-it-says":
@@ -179,7 +184,8 @@ function getSongInfo(songName) {
 // Function to get OMDB info via RequestJS
 function getMovieInfo(movieName) {
     // Variable to store the dynamically created URL
-    let queryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&r=json&apikey=40e9cece`;
+    let mName = movieName ? movieName : "Mr. Nobody";
+    let queryUrl = `http://www.omdbapi.com/?t=${mName}&y=&r=json&apikey=40e9cece`;
 
     // Use RequestJS to get the web page
     request(queryUrl, function (error, response, body) {
@@ -203,7 +209,7 @@ function getMovieInfo(movieName) {
             console.log("Plot ", JSON.parse(body).Plot);
             console.log("Actors ", JSON.parse(body).Actors);
 
-            bonusMe(`movie-this | ${movieName}`, JSON.stringify(body));
+            bonusMe(`movie-this | ${mName}`, JSON.stringify(body));
         }
     });
 }

@@ -9,17 +9,17 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
 4) Or, you can let us decide what to search
 
 ### For Twitter Search:
-    * Enter the following command: ```node liri.js my-tweets```
+    * Enter the following command: `node liri.js my-tweets`
 
 ### For Spotify Search:
-    1) To specify a song, enter the following command: ```node liri.js spotify-this-song "[song name]"```
-        a) Example Search: ```node liri.js spotify-this-song "Back in Black"```
-    2) To search a song of our choosing, enter the following command: ```node liri.js spotify-this-song```
+    1) To specify a song, enter the following command: `node liri.js spotify-this-song "[song name]"`
+        a) Example Search: `node liri.js spotify-this-song "Back in Black"`
+    2) To search a song of our choosing, enter the following command: `node liri.js spotify-this-song`
 
 ### For OMDB Search:
-    1) To specify a movie, enter the following command: ```node liri.js movie-this "[movie name]"```
-        a) Example Search: ```node liri.js movie-this "Ferris Bueller's Day Off"```
-    2) To search a movie of our choosing, enter the following command: ```node liri.js movie-this```
+    1) To specify a movie, enter the following command: `node liri.js movie-this "[movie name]"`
+        a) Example Search: `node liri.js movie-this "Ferris Bueller's Day Off"`
+    2) To search a movie of our choosing, enter the following command: `node liri.js movie-this`
     
 ### To Run a Search of Our Choosing:
-    * Enter the following command: ```node liri.js do-what-it-says```
+    * Enter the following command: `node liri.js do-what-it-says`

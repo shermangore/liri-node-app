@@ -17,8 +17,6 @@ let spot_secret = keys.spotifyKeys.client_secret;
 let cmd = process.argv[2];
 let option1 = process.argv[3];
 
-bonusMe(option1 != null ? option1 + " - " + cmd : cmd);
-
 // Look at the initial CLI parameter and execute code based on that parameter
 switch (cmd) {
     case "my-tweets":
@@ -36,7 +34,6 @@ switch (cmd) {
         // You will utilize the [node-spotify-api](https://www.npmjs.com/package/node-spotify-api) package in order to retrieve song information from the Spotify API.
         if (option1) {
             getSongInfo(option1);
-
         } else {
             getSongInfo();
         }
@@ -64,7 +61,7 @@ switch (cmd) {
         fs.readFile("random.txt", "utf8", function(error, data) {
             // Check for errors
             if (error) {
-                console.log(error);
+                return console.log(error);
             }
             
             // Get the file contents and split it
@@ -120,6 +117,8 @@ function getTweets() {
                     // Write it out, write it out
                     console.log(`Created: ${data[i].created_at} | ${data[i].text}`);
                 }
+
+                bonusMe("my-tweets", JSON.stringify(data));
             }
         }
     );
@@ -149,12 +148,14 @@ function getSongInfo(songName) {
             console.log(`Song Name: ${data.tracks.items[0].album.name}`);
             console.log(`Preview: ${data.tracks.items[0].external_urls.spotify}`); // Fix this to display info
             console.log(`Album: ${data.tracks.items[0].album.name}`); // Fix this also
+
+            bonusMe(`spotify-this-song | ${songName}`, JSON.stringify(data));
         });
     } else {
         spot.search({
             type: 'track',
             query: 'The Sign',
-            limit: 10
+            limit: 5
         }, function(err, data) {
             if (err) {
                 //  Oh no, doge caught an error
@@ -169,6 +170,8 @@ function getSongInfo(songName) {
                     console.log(`Album: ${data.tracks.items[i].name}`);
                 }
             }
+
+            bonusMe(`spotify-this-song`, JSON.stringify(data));
         });
     }
 }
@@ -199,6 +202,8 @@ function getMovieInfo(movieName) {
             console.log("Language ", JSON.parse(body).Language);
             console.log("Plot ", JSON.parse(body).Plot);
             console.log("Actors ", JSON.parse(body).Actors);
+
+            bonusMe(`movie-this | ${movieName}`, JSON.stringify(body));
         }
     });
 }
@@ -206,14 +211,12 @@ function getMovieInfo(movieName) {
 /*
 ### BONUS
  * In addition to logging the data to your terminal/bash window, output the data to a .txt file called `log.txt`.
- 
  * Make sure you append each command you run to the `log.txt` file. 
- 
  * Do not overwrite your file each time you run a command.
 */
-function bonusMe(blah) {
-    fs.appendFile('log.txt', blah + "\r\n", (err) => {
+function bonusMe(command, output) {
+    fs.appendFile('log.txt', command + "\r\n" + output + "\r\n\r\n", (err) => {
         if (err) throw err;
-        console.log('The "data to append" was appended to file!');
+        console.log('Log file was updated.');
     });
 }
